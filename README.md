@@ -1,9 +1,9 @@
 # k8s-containerd
 A Kubernetes Cluster using Vagrant, Ansible, containerd as runtime, 1 master node + 2 workers
 
-Containerd is [adopted](https://github.com/containerd/containerd/blob/main/ADOPTERS.md) by many cloud providers and distribution of Kubernetes. [nerdctl](https://github.com/containerd/nerdctl) is a Docker-compatible CLI for containerd. Recently I found that several articles about the usage of nerd. Considering those factors, I think it is time to learn containerd seriously.
+Containerd is [adopted](https://github.com/containerd/containerd/blob/main/ADOPTERS.md) by many cloud providers and distribution of Kubernetes. [nerdctl](https://github.com/containerd/nerdctl) is a Docker-compatible CLI for containerd. Recently I found that several articles about the usage of nerdctl. Considering those factors, I think it is time to learn containerd seriously.
 
-Thank to [containerd contrib/ansible](https://github.com/containerd/containerd/tree/main/contrib/ansible) and [my own one](https://github.com/jackliusr/calico-the-hard-way).
+I used most of ansible configuration from  [containerd contrib/ansible](https://github.com/containerd/containerd/tree/main/contrib/ansible) and [my own one](https://github.com/jackliusr/calico-the-hard-way).
 
 After nodes are provisioned, run following command  to create a cluster. Each node has two network interfaces and ip addresses and they can only communicate each other using 172.17.177.## ip addresses. Each node's IP address is added into /etc/systemd/system/kubelet.service.d/10-kubeadm.conf as "--node-ip" in KUBELET_EXTRA_ARGS. That's why --apiserver-advertise-address is used.
 
