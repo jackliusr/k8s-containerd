@@ -13,10 +13,7 @@ vagrant up
 
 
 ## Setup Cluster
-After nodes are provisioned, run following command  to create a cluster. Each node has two network interfaces and ip addresses and they can only communicate each other using 172.17.177.## ip addresses. Each node's IP address is added into /etc/systemd/system/kubelet.service.d/10-kubeadm.conf as "--node-ip" in KUBELET_EXTRA_ARGS. That's why --apiserver-advertise-address is used.
-
-Nodes are provisioned with default settings which don't meet the [node requirements](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#pod-network): at least 2 GiB RAM and 2 CPUs. This will fail pre-flight checks of kubeadmin, use "--ignore-preflight-errors=all" to bypass those errors.
-
+After nodes are provisioned, run following command  to create a cluster. 
 ```bash
 #ssh into controller, run at host machine
 vagrant ssh controller
@@ -31,6 +28,13 @@ vagrant ssh node1
 sudo kubeadm join 172.17.177.11:6443 --token scylxf.gak8fgwwzdssoepy \
         --discovery-token-ca-cert-hash sha256:f1ba9ecfeef1c4549256d99efa6a8302c16b84e5a1ca73d9beeba90172858e41 --ignore-preflight-errors=all
 ```
+
+Each node has two network interfaces and ip addresses and they can only communicate each other using 172.17.177.## ip addresses. Each node's IP address is added into /etc/systemd/system/kubelet.service.d/10-kubeadm.conf as "--node-ip" in KUBELET_EXTRA_ARGS. That's why --apiserver-advertise-address is used.
+
+Nodes are provisioned with default settings which don't meet the [node requirements](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#pod-network): at least 2 GiB RAM and 2 CPUs. This will fail pre-flight checks of kubeadmin, use "--ignore-preflight-errors=all" to bypass those errors.
+
+
+## Test Cluster
 
 ```bash
 kubectl create deployment nginx --image=nginx --replicas=2
