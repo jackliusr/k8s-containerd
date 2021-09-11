@@ -5,6 +5,14 @@ Containerd is [adopted](https://github.com/containerd/containerd/blob/main/ADOPT
 
 I used most of ansible configuration from  [containerd contrib/ansible](https://github.com/containerd/containerd/tree/main/contrib/ansible) and [my own one](https://github.com/jackliusr/calico-the-hard-way).
 
+## Provision nodes
+```bash
+ssh-keygen #id_rsa and id_rsa.pub
+vagrant up
+```
+
+
+## Setup Cluster
 After nodes are provisioned, run following command  to create a cluster. Each node has two network interfaces and ip addresses and they can only communicate each other using 172.17.177.## ip addresses. Each node's IP address is added into /etc/systemd/system/kubelet.service.d/10-kubeadm.conf as "--node-ip" in KUBELET_EXTRA_ARGS. That's why --apiserver-advertise-address is used.
 
 Nodes are provisioned with default settings which don't meet the [node requirements](https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/#pod-network): at least 2 GiB RAM and 2 CPUs. This will fail pre-flight checks of kubeadmin, use "--ignore-preflight-errors=all" to bypass those errors.
