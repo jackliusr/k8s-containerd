@@ -3,7 +3,7 @@ A Kubernetes Cluster using Vagrant, Ansible, containerd as runtime, 1 master nod
 
 Containerd is [adopted](https://github.com/containerd/containerd/blob/main/ADOPTERS.md) by many cloud providers and distribution of Kubernetes. [nerdctl](https://github.com/containerd/nerdctl) is a Docker-compatible CLI for containerd. Recently I found that several articles about the usage of nerdctl. Considering those factors, I think it is time to learn containerd seriously.
 
-I used most of ansible configuration from  [containerd contrib/ansible](https://github.com/containerd/containerd/tree/main/contrib/ansible) and [my own one](https://github.com/jackliusr/calico-the-hard-way).
+I used most of ansible configurations from  [containerd contrib/ansible](https://github.com/containerd/containerd/tree/main/contrib/ansible) and [my own one](https://github.com/jackliusr/calico-the-hard-way). "[Ansible Parallel Execution from a Guest](https://www.vagrantup.com/docs/provisioning/ansible_local#ansible-parallel-execution-from-a-guest)" technique is used as well in this repository.
 
 ## Provision nodes
 ```bash
