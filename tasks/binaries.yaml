@@ -1,9 +1,14 @@
 ---
+- name: check if containerd exists
+  stat:
+     path: /usr/local/bin/containerd
+  register: containerd_exist
 - name: "Get Containerd"
   unarchive:
     src: "https://github.com/containerd/containerd/releases/download/v{{ containerd_release_version }}/cri-containerd-cni-{{ containerd_release_version }}-linux-amd64.tar.gz"
     dest: "/"
     remote_src: yes
+  when: containerd_exist.stat.exists == false
 
 - name: "Create a directory for cni binary"
   file: path={{ cni_bin_dir }} state=directory
